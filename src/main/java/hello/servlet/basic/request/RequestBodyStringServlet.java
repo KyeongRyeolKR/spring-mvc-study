@@ -1,4 +1,4 @@
-package hello.springmvc.basic.request;
+package hello.servlet.basic.request;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
