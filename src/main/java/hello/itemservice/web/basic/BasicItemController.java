@@ -19,6 +19,7 @@ public class BasicItemController {
 
     private final ItemRepository itemRepository;
 
+    // 상품 목록
     @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
@@ -28,6 +29,7 @@ public class BasicItemController {
         return "basic/items";
     }
 
+    // 상품 상세
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -35,6 +37,12 @@ public class BasicItemController {
         model.addAttribute("item", item);
 
         return "basic/item";
+    }
+
+    // 상품 등록 폼
+    @GetMapping("/add")
+    public String addForm() {
+        return "basic/addForm";
     }
 
     /**
