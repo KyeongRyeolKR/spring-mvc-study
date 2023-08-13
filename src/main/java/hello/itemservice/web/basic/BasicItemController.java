@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class BasicItemController {
     // 상품 등록 처리 V4
     // 단순 타입이 아닌 경우 @ModelAttribute도 생략 가능하다.
     // 단순 타입 : Integer, int, String과 같은 타입
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(Item item) {
         itemRepository.save(item);
 
@@ -97,11 +98,24 @@ public class BasicItemController {
     // 상품 등록 처리 V5
     // Post-Redirect-Get 패턴을 사용했다.
     // 덕분에 클라이언트가 새로고침을 해도 상품이 또 저장되는 문제가 없다.
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV5(Item item) {
         itemRepository.save(item);
 
         return "redirect:/basic/items/" + item.getId();
+    }
+
+    // 상품 등록 처리 V6
+    // 리다이렉트 할 때 RedirectAttributes를 사용하면 편리한 기능들이 있다.
+    // URL 인코딩, PathVariable, 쿼리 파라미터까지 처리해준다.
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes) {
+        Item savedItem = itemRepository.save(item);
+
+        redirectAttributes.addAttribute("itemId", savedItem.getId()); // 치환되는 경우
+        redirectAttributes.addAttribute("status", true); // 치환되지 않는 경우 -> 쿼리 파라미터로 나타냄
+
+        return "redirect:/basic/items/{itemId}"; // -> ex) /basic/items/3?status=true
     }
 
     // 상품 수정 폼
