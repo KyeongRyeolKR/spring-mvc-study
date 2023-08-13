@@ -94,6 +94,16 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    // 상품 등록 처리 V5
+    // Post-Redirect-Get 패턴을 사용했다.
+    // 덕분에 클라이언트가 새로고침을 해도 상품이 또 저장되는 문제가 없다.
+    @PostMapping("/add")
+    public String addItemV5(Item item) {
+        itemRepository.save(item);
+
+        return "redirect:/basic/items/" + item.getId();
+    }
+
     // 상품 수정 폼
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
