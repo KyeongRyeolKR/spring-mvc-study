@@ -80,18 +80,19 @@ public class BasicController {
         return "basic/basic-objects";
     }
 
-    @Component("helloBean")
-    static class HelloBean {
-        public String hello(String data) {
-            return "Hello" + data;
-        }
-    }
-
+    // 유틸리티 객체와 날짜
     @GetMapping("/date")
     public String date(Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
 
         return "basic/date";
+    }
+
+    @Component("helloBean")
+    static class HelloBean {
+        public String hello(String data) {
+            return "Hello" + data;
+        }
     }
 
     @Data
