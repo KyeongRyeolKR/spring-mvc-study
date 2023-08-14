@@ -1,6 +1,10 @@
 package hello.thymeleaf.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +59,31 @@ public class BasicController {
         model.addAttribute("userMap", map);
 
         return "basic/variable";
+    }
+
+    // 타임리프에서 지원하는 기본 객체 및 편의 객체들
+    // 스프링 2.x 까지는 기본 객체에 request, response, servletContext 도 있었지만,
+    // 스프링 3.x 부터는 지원하지 않는다. 그러므로 직접 모델에 담아서 출력했다.
+    // 자주 쓰는 객체 : session, param 등
+    // 스프링 빈 접근 : @ + 빈 이름
+    @GetMapping("/basic-objects")
+    public String basicObjects(Model model,
+                               HttpServletRequest request,
+                               HttpServletResponse response,
+                               HttpSession session
+    ) {
+        session.setAttribute("sessionData", "Hello Session");
+        model.addAttribute("request", request);
+        model.addAttribute("response", response);
+        model.addAttribute("servletContext", request.getServletContext());
+        return "basic/basic-objects";
+    }
+
+    @Component("helloBean")
+    static class HelloBean {
+        public String hello(String data) {
+            return "Hello" + data;
+        }
     }
 
     @Data
