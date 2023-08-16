@@ -97,6 +97,18 @@ public class BasicController {
         return "basic/link";
     }
 
+    // 리터럴
+    // 타임리프에서 문자 리터럴은 항상 ''으로 감싸야한다.
+    // 하지만 매번 ''를 사용해서 감싸주는건 귀찮다.
+    // 그러므로 공백없이 쭉 이어진 문자라면 ''를 생략할 수 있다.
+    // 공백이 있는 문자들을 써야할 땐, ||(리터럴 대체 문법)을 사용하면 편하게 쓸 수 있다.
+    @GetMapping("/literal")
+    public String literal(Model model) {
+        model.addAttribute("data", "Spring!");
+
+        return "basic/literal";
+    }
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
