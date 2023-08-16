@@ -166,6 +166,18 @@ public class BasicController {
         return "basic/comments";
     }
 
+    // 블록
+    // 타임리프는 대체로 속성을 기반으로 동작하는데,
+    // 특이하게도 타임리프 자체 태그인 block 태그가 존재한다.
+    // th:each 만으로 해결이 힘들거나 애매한 경우에 사용한다.
+    // 안쓰는게 좋지만 어쩔 수 없는 경우엔 사용해야한다.
+    @GetMapping("/block")
+    public String block(Model model) {
+        addUsers(model);
+
+        return "basic/block";
+    }
+
     private void addUsers(Model model) {
         List<User> list = new ArrayList<>();
         list.add(new User("UserA", 10));
