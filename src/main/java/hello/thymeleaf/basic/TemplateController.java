@@ -23,4 +23,12 @@ public class TemplateController {
     public String layout() {
         return "template/layout/layoutMain";
     }
+
+    // 템플릿 레이아웃 확장
+    // 아예 <html> 태그 자체를 바꿔버린다.
+    // 바꿀 때 넘겨진 파라미터(태그)들을 원하는 내용으로 변경해서 쓰면 유지보수가 쉽다.
+    @GetMapping("/layoutExtend")
+    public String layoutExtend() {
+        return "template/layoutExtend/layoutExtendMain";
+    }
 }
