@@ -178,6 +178,18 @@ public class BasicController {
         return "basic/block";
     }
 
+    // 자바스크립트 인라인
+    // 자바스크립트를 더욱 편하게 사용할 수 있게 해준다.
+    // 텍스트 랜더링, 자바스크립트 내추럴 템플릿, 객체, 인라인 each
+    @GetMapping("/javascript")
+    public String javascript(Model model) {
+        model.addAttribute("user", new User("UserA", 10));
+
+        addUsers(model);
+
+        return "basic/javascript";
+    }
+
     private void addUsers(Model model) {
         List<User> list = new ArrayList<>();
         list.add(new User("UserA", 10));
