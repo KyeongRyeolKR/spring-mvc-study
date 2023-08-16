@@ -109,6 +109,21 @@ public class BasicController {
         return "basic/literal";
     }
 
+    // 연산
+    // 비교연산 : HTML 엔티티를 사용해야 하는 부분을 주의
+    // 조건식 : 자바와 비슷함 (삼항 연산자)
+    // Elvis 연산자 : ${data} ?: '없음' -> data가 있다면 data 출력, 없다면(null) 없음 출력
+    // No-Operation : '_' 인 경우 타임리프가 실행되지 않는것처럼 동작함.
+    // ex) <p th:text="${null} ?: _">없음</p>
+    // null 이기 때문에 타임리프가 실행되지 않는 것처럼 기본 지정된 텍스트인 '없음'이 출력됨
+    @GetMapping("/operation")
+    public String operation(Model model) {
+        model.addAttribute("nullData", null);
+        model.addAttribute("data", "Spring!");
+
+        return "basic/operation";
+    }
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
