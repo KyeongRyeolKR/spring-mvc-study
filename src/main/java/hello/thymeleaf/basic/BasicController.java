@@ -136,6 +136,26 @@ public class BasicController {
         return "basic/attribute";
     }
 
+    // 반복
+    // th:each -> th:each="[지역변수] : ${data}" 형식으로 사용한다.
+    // 반복되고 있는 현재 컬렉션에 대한 정보를 얻으려면 [지역변수]+Stat 이름의 변수로 접근 가능하다.
+    // 제공되는 정보 : index/count/size/even/odd/first/last/current
+    @GetMapping("/each")
+    public String each(Model model) {
+        addUsers(model);
+
+        return "basic/each";
+    }
+
+    private void addUsers(Model model) {
+        List<User> list = new ArrayList<>();
+        list.add(new User("UserA", 10));
+        list.add(new User("UserB", 20));
+        list.add(new User("UserC", 30));
+
+        model.addAttribute("users", list);
+    }
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
