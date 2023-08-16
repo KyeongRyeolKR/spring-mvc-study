@@ -147,6 +147,17 @@ public class BasicController {
         return "basic/each";
     }
 
+    // 조건부 평가
+    // th:if / th:unless
+    // th:switch / th:case
+    // 자바의 조건문과 굉장히 유사하기에 쉽다.
+    @GetMapping("/condition")
+    public String condition(Model model) {
+        addUsers(model);
+
+        return "basic/condition";
+    }
+
     private void addUsers(Model model) {
         List<User> list = new ArrayList<>();
         list.add(new User("UserA", 10));
