@@ -124,6 +124,18 @@ public class BasicController {
         return "basic/operation";
     }
 
+    // 속성 값 변경
+    // th:attrappend -> 지정한 속성을 앞에 추가
+    // th:attrprepend -> 지정한 속성을 뒤에 추가
+    // th:classappend -> 클래스 뒤에 추가
+    // th:checked -> 값이 true면 check, false면 uncheck
+    // 원래 HTML에서 checked 옵션은 값이 true든 false든 checked 옵션이 존재하면 체크하는데,
+    // 타임리프의 th:checked는 false라면 아예 checked 속성 자체를 지워버린다.
+    @GetMapping("/attribute")
+    public String attribute() {
+        return "basic/attribute";
+    }
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
