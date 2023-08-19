@@ -46,6 +46,15 @@ public class ValidationItemControllerV3 {
         // 애초부터 데이터가 바인딩 될 때 잘못된 값이 입력되었다면 검증기(Bean Validation)가 동작하지 않고,
         // typeMismatch 오류코드에 대한 FieldError와 메시지를 생성한다.
 
+        // 특정 필드가 아닌 복합 룰 검증
+        // 아래와 같은 오브젝트 오류는 Bean Validation이 아닌 직접 검증해주는게 좋다.
+        if(item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if(resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
         // 검증 실패 시 다시 입력 폼으로 이동
         if(bindingResult.hasErrors()) {
             log.info("errors = {}", bindingResult);
