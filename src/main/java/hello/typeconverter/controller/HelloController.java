@@ -19,6 +19,7 @@ public class HelloController {
         return "ok";
     }
 
+    // 포맷터가 적용되고나서 "1,000"을 파라미터로 넘기면 포맷팅 처리를 통해 1000을 data에 담는다.
     @GetMapping("/hello-v2")
     public String helloV2(@RequestParam Integer data) {
         System.out.println("data = " + data);
